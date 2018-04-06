@@ -1,0 +1,67 @@
+
+# A hello represents a hello message.
+type Hello implements Node {
+  # Globally unique identifier.
+  id: ID!
+
+  # The hello message .
+  message: String!
+
+  # hello creation date time
+  create_time: DateTime!
+
+  # hello update date time
+  update_time: DateTime!
+
+}
+
+type HelloConnection {
+  # A list of edges.
+  edges: [HelloEdge!]!
+
+  # Information to aid in pagination.
+  pageInfo: PageInfo!
+}
+
+type HelloEdge {
+  # A cursor for use in pagination.
+  cursor: String!
+
+  # The item at the end of HelloEdge.
+  node: Hello!
+}
+
+
+##############################################
+# Hello Mutations
+#        hello0Create(input: HelloCreateInput!): HelloCreatePayload!
+#        hello1Update(input: HelloUpdateInput!): HelloUpdatePayload!
+#        hello2Activate(input: HelloActivateInput!): HelloActivatePayload!
+#        hello2Deactivate(input: HelloDeactivateInput!): HelloDeactivatePayload!
+input HelloCreateInput{
+    #Hello name
+    name: String!
+
+}
+
+input HelloUpdateInput{
+    id: ID!
+    message: String!
+}
+
+
+type HelloCreatePayload {
+  # The hello object.
+  hello: Hello
+
+  # List of errors that occurred executing the mutation.
+  userErrors: [UserError!]!
+}
+
+type HelloUpdatePayload {
+  # The hello object.
+  hello: Hello
+
+  # List of errors that occurred executing the mutation.
+  userErrors: [UserError!]!
+}

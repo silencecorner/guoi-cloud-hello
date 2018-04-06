@@ -1,0 +1,4 @@
+rootProject.name = 'guoi-cloud-hello'
+include 'gateway-hello-graphql'
+include 'micro-hello-grpc'
+

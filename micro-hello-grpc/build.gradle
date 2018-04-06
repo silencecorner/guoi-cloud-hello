@@ -1,0 +1,41 @@
+plugins {
+    id 'java'
+    id 'idea'
+    id 'org.springframework.boot'
+    id "io.spring.dependency-management"
+}
+repositories {
+    mavenCentral()
+    jcenter()
+    maven { url 'https://jitpack.io' }
+}
+
+
+
+dependencies {
+
+    compile ('com.github.conanchen.guoi-micro-apis:shopie-order-grpc-java:master-SNAPSHOT'){ changing = true }
+    compile ('com.github.conanchen.guoi-micro-apis:hello-grpc-java:master-SNAPSHOT'){ changing = true }
+
+    compile("org.lognet:grpc-spring-boot-starter:${GRPC_STARTER_VERSION}")
+
+    compile("org.springframework.boot:spring-boot-starter-web")
+    compile("org.springframework.boot:spring-boot-starter-actuator")
+    compile("org.springframework.boot:spring-boot-starter-data-mongodb-reactive")
+    compile("io.reactivex.rxjava2:rxjava:${rxjava2Version}")
+    compile("io.reactivex:rxjava-reactive-streams:${rxjavaReactiveStreamsVersion}")
+
+    testCompile("org.springframework.boot:spring-boot-starter-test")
+    testCompile "io.grpc:grpc-testing:${grpcVersion}"
+
+    compileOnly("org.projectlombok:lombok:${lombokVersion}")
+    testCompileOnly("org.projectlombok:lombok:${lombokVersion}")
+}
+
+
+dependencyManagement {
+    imports { mavenBom("org.springframework.boot:spring-boot-dependencies:${springBootVersion}") }
+}
+
+
+project.logger.lifecycle("~~~~~~~~~~~~~~~~~MICRO-HELLO-GRPC BUILD DONE!~~~~~~~~~~~~~~~~~~");

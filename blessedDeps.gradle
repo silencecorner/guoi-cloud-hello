@@ -1,0 +1,8 @@
+rootProject.ext.springBootVersion='2.0.0.RELEASE'
+rootProject.ext.grpcVersion = '1.10.0'
+rootProject.ext.GRPC_STARTER_VERSION = '2.2.0'
+rootProject.ext.GRAPHQL_SPRINT_BOOT_STARTER_VERSION="4.0.0"
+rootProject.ext.GRAPHIQL_SPRINT_BOOT_STARTER_VERSION="4.0.0"
+rootProject.ext.lombokVersion="1.16.20"
+rootProject.ext.rxjava2Version="2.1.1"
+rootProject.ext.rxjavaReactiveStreamsVersion="1.2.1"
