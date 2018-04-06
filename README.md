@@ -1,11 +1,10 @@
 # Introduction
-Define guoi cloud microservice grpc api : 
-- authcow
-- cms
-- gis
-- party
-- shoppie
-- common : is a share library for all above api projects
+Sample Hello Application demostrate following modules:
+- gateway-hello-graphql
+    > implements graphql query and mutation for Hello by calling grpc apis provided by 
+    micro-hello-grpc
+- micro-hello-grpc
+    > implements grpc micro service for Hello CRUD 
 
 ## API Design Guide
 - Refer to [Google API Design Guide](https://cloud.google.com/apis/design/) 
@@ -135,7 +134,7 @@ mutation ($input:HelloCreateInput!){
 ```
 
 
-# Building ahead of time for guoi-micro-apis 
+# Building ahead of time for guoi-cloud-hello 
 You can also build snapshots on each commit if you add GitHub Webhooks.
 
 To add, head to repository Settings -> Webhooks & Services -> Add webhook.
