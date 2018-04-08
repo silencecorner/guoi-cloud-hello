@@ -2,10 +2,12 @@ package guoi.hello.graphql.types.hello.mutation;
 
 import com.github.conanchen.guoi.graphql.types.common.UserError;
 import guoi.hello.graphql.types.hello.Hello;
+import lombok.Getter;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Getter
 public class HelloCreatePayload {
     //  # The hello object.
     private Hello hello;//        hello: Hello

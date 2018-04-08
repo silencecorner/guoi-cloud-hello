@@ -20,8 +20,8 @@ public class Mutation implements GraphQLMutationResolver {
 
 
 
-//    # 创建Hello
-//    hello0Create(input: HelloCreateInput!): HelloCreatePayload!
+    //    # 创建Hello
+    //    hello0Create(input: HelloCreateInput!): HelloCreatePayload!
     public HelloCreatePayload hello0Create(HelloCreateInput input){
        com.github.conanchen.guoi.cloud.hello.grpc.Hello grpcHello =  helloGrpcClient.createHello(input.getName());
        return HelloCreatePayload.builder().hello( Hello.builder()

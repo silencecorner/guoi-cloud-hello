@@ -11,7 +11,6 @@ import org.springframework.data.mongodb.repository.config.EnableReactiveMongoRep
 
 @SpringBootApplication
 @EnableReactiveMongoRepositories
-@EnableAutoConfiguration
 public class HelloMicroApplication extends AbstractReactiveMongoConfiguration
 {
 

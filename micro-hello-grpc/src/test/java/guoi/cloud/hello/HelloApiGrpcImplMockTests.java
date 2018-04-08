@@ -12,6 +12,7 @@ import io.reactivex.SingleObserver;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -19,17 +20,18 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.Date;
 
+import static org.mockito.Mockito.any;
+import static org.mockito.Mockito.when;
 import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.startsWith;
 import static org.junit.Assert.assertThat;
-import static org.mockito.Mockito.any;
 import static org.mockito.Mockito.when;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes = {HelloApiGrpcImpl.class},
-        webEnvironment = SpringBootTest.WebEnvironment.NONE
-        , properties = "grpc.port=0")
-public class HelloApiGrpcImplTest {
+@SpringBootTest(
+        webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT,
+        properties = "grpc.port=0")
+public class HelloApiGrpcImplMockTests {
     /**
      * This creates and starts an in-process server, and creates a client with an in-process channel.
      * When the test is done, it also shuts down the in-process client and server.
@@ -49,6 +51,7 @@ public class HelloApiGrpcImplTest {
      */
     @Test
     public void test_createHello_then_return_hello() throws Exception {
+        //Given
         when(helloMongoRepository.save(any(HelloMongo.class))).thenReturn(new Single<HelloMongo>() {
             @Override
             protected void subscribeActual(SingleObserver<? super HelloMongo> observer) {
@@ -68,8 +71,10 @@ public class HelloApiGrpcImplTest {
                 HelloApiGrpc.newBlockingStub(grpcServerRule.getChannel());
         String testName = "test name";
 
+        //When
         Hello reply = blockingStub.createHello(HelloRequest.newBuilder().setName(testName).build());
 
+        //Then
         assertThat(reply.getName(), startsWith("hellos/"));
         assertThat(reply.getMessage(), containsString(testName));
     }

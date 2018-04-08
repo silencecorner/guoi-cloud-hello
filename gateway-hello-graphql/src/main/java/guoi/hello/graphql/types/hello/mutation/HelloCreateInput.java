@@ -14,4 +14,8 @@ public class HelloCreateInput {
     public void setName(String name) {
         this.name = name;
     }
+
+    public HelloCreateInput(String name) {
+        this.name = name;
+    }
 }
