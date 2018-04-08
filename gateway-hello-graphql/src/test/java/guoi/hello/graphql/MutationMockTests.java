@@ -1,30 +1,34 @@
 package guoi.hello.graphql;
 
-import guoi.cloud.hello.HelloMicroApplication;
-import guoi.cloud.hello.grpc.HelloApiGrpcImpl;
-import guoi.hello.HelloGatewayApplication;
+import com.github.conanchen.guoi.cloud.hello.grpc.Hello;
+import com.google.protobuf.Timestamp;
 import guoi.hello.graphql.types.hello.mutation.HelloCreateInput;
 import guoi.hello.graphql.types.hello.mutation.HelloCreatePayload;
+import guoi.hello.grpc.client.HelloGrpcClient;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit4.SpringRunner;
+
+import java.util.Date;
 
 import static org.hamcrest.Matchers.startsWith;
 import static org.junit.Assert.assertThat;
+import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.Mockito.when;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes = {HelloGatewayApplication.class,
-        HelloMicroApplication.class},
+@SpringBootTest(
         webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT,
         properties = "grpc.port=0")
+public class MutationMockTests {
 
-public class MutationTests {
 
-    private static final Logger log = LoggerFactory.getLogger(MutationTests.class);
+    @MockBean
+    HelloGrpcClient helloGrpcClient;
 
     @Autowired
     Mutation mutation;
@@ -37,13 +41,18 @@ public class MutationTests {
     @Test
     public void test_createHello_then_return_hello() throws Exception {
         //Given
-
+        when(helloGrpcClient.createHello(anyString()))
+                .thenReturn(Hello.newBuilder()
+                        .setName("hellos/123")
+                        .setMessage("hello " + anyString())
+                        .setCreateTime(Timestamp.newBuilder().setSeconds((new Date()).getTime()).build())
+                        .setUpdateTime(Timestamp.newBuilder().setSeconds((new Date()).getTime()).build())
+                        .build());
 
         //When
         HelloCreatePayload helloCreatePayload = mutation.hello0Create(new HelloCreateInput("conan"));
-        log.debug("helloCreatePayload={}", helloCreatePayload);
 
         //Then
-        assertThat(helloCreatePayload.getHello().getId(), startsWith("ddhellos/"));
+        assertThat(helloCreatePayload.getHello().getId(), startsWith("hellos/"));
     }
 }

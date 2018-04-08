@@ -25,6 +25,7 @@ dependencies {
     compile("org.springframework.boot:spring-boot-starter-actuator")
 
     testCompile("org.springframework.boot:spring-boot-starter-test")
+    testCompile project(":micro-hello-grpc")
 
 
     compileOnly("org.projectlombok:lombok:${lombokVersion}")
