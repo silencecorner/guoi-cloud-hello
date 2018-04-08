@@ -133,6 +133,15 @@ mutation ($input:HelloCreateInput!){
 }
 ```
 
+# Run Test Cases
+On Windows if you encounter bellow errors,refer to [I made a folder in the directory ${user.home}/.embedmongo/win32/ and it worked!](https://github.com/flapdoodle-oss/de.flapdoodle.embed.mongo/issues/89)
+```text
+Caused by: java.io.IOException: Could not open inputStream for https://downloads.mongodb.org/win32/mongodb-win32-x86_64-3.2.2.zip
+	at de.flapdoodle.embed.process.store.Downloader.downloadInputStream(Downloader.java:131)
+	at de.flapdoodle.embed.process.store.Downloader.download(Downloader.java:69)
+	at de.flapdoodle.embed.process.store.ArtifactStore.checkDistribution(ArtifactStore.java:66)
+	at de.flapdoodle.embed.process.store.ExtractedArtifactStore.checkDistribution(ExtractedArtifactStore.java:60)
+```
 
 # Building ahead of time for guoi-cloud-hello 
 You can also build snapshots on each commit if you add GitHub Webhooks.
