@@ -4,27 +4,18 @@ import com.github.conanchen.guoi.cloud.hello.grpc.Hello;
 import com.github.conanchen.guoi.cloud.hello.grpc.HelloApiGrpc;
 import com.github.conanchen.guoi.cloud.hello.grpc.HelloRequest;
 import guoi.cloud.hello.grpc.HelloApiGrpcImpl;
-import guoi.cloud.hello.mongo.HelloMongo;
 import guoi.cloud.hello.mongo.HelloMongoRepository;
 import io.grpc.testing.GrpcServerRule;
-import io.reactivex.Single;
-import io.reactivex.SingleObserver;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.data.mongo.DataMongoTest;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit4.SpringRunner;
-
-import java.util.Date;
 
 import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.startsWith;
 import static org.junit.Assert.assertThat;
-import static org.mockito.Mockito.any;
-import static org.mockito.Mockito.when;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(
