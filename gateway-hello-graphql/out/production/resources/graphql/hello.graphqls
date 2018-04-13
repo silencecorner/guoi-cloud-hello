@@ -32,12 +32,8 @@ type HelloEdge {
 }
 
 
-##############################################
-# Hello Mutations
-#        hello0Create(input: HelloCreateInput!): HelloCreatePayload!
-#        hello1Update(input: HelloUpdateInput!): HelloUpdatePayload!
-#        hello2Activate(input: HelloActivateInput!): HelloActivatePayload!
-#        hello2Deactivate(input: HelloDeactivateInput!): HelloDeactivatePayload!
+
+# 创建Hello输入参数
 input HelloCreateInput{
     #Hello name
     name: String!
@@ -50,6 +46,7 @@ input HelloUpdateInput{
 }
 
 
+#创建Hello的回复
 type HelloCreatePayload {
   # The hello object.
   hello: Hello

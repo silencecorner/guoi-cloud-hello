@@ -46,6 +46,13 @@ dependencies {
     compile ("com.github.conanchen.guoi-micro-apis:gis-asset-grpc-java:master-SNAPSHOT"){ changing = true }
 }
 ```
+## Step 5. Refresh Dependencies & Skip Test
+```bash
+
+export http_proxy=http://127.0.0.1:1087;export https_proxy=http://127.0.0.1:1087;
+
+gradle build --refresh-dependencies -x test
+```
 
 # How it works
 ## Step 1. open browser [http://localhost:9999/graphiql](http://localhost:9999/graphiql)	
@@ -133,6 +140,8 @@ mutation ($input:HelloCreateInput!){
 }
 ```
 
+# api graphql test
+For more information, [README](api-graphql-test/README.md)
 
 # Building ahead of time for guoi-cloud-hello 
 You can also build snapshots on each commit if you add GitHub Webhooks.

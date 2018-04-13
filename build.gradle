@@ -75,7 +75,7 @@ repositories {
 configurations.all {
     //https://www.jianshu.com/p/870c9e3ee0c9
     //每隔10分钟..
-    resolutionStrategy.cacheChangingModulesFor 10, 'minutes'
+    resolutionStrategy.cacheChangingModulesFor 24*10, 'hours'
 }
 
 project.logger.lifecycle("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
