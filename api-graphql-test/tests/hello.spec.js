@@ -1,29 +1,62 @@
 import axios from 'axios';
-import { XMLHttpRequest } from 'xmlhttprequest';
+import {XMLHttpRequest} from 'xmlhttprequest';
 
 global.XMLHttpRequest = XMLHttpRequest;
 
 describe('hellos', () => {
-  test('hellos', async () => {
-    // 执行调用api
-    const response = await axios.post('http://localhost:9999/graphql', {
-      query: `
+    test('hellos', async() =>{
+    const response = await
+    axios.post('http://localhost:9999/graphql', {
+        query: `
         {
-          sum:（1,2)
+          hellos(after: "cursor") {
+            edges {
+              cursor
+            }
+          }
         }
       `,
     });
 
-    //获取实际结果
-    const { data } = response;
-    // expect(data).toMatchObject({
-    //   data: {
-    //     hellos: [],
-    //   },
-    // });
-    //将实际结果与预期比较， 比较结果要么true，要么false
-    expect(data).toEqual(3)
-    );
-  });
+    expect(response.status).toEqual(200);
+
+    const {data} = response;
+    expect(data).toMatchObject({
+        data: {
+            hellos: {
+                edges: [{
+                    "cursor": "aGVsbG9zLzlkYmVhNDIzLWU4NWQtNGY0NC1hMjZiLWIyNzEyOTVhZGNlOA=="
+                },{
+                    "cursor": "cursor=="
+                },{
+                    "cursor": "cursor"
+                },{
+                    "cursor": "cursor"
+                },{
+                    "cursor": "cursor"
+                },{
+                    "cursor": "cursor"
+                },{
+                    "cursor": "cursor"
+                },{
+                    "cursor": "cursor"
+                },{
+                    "cursor": "cursor"
+                },{
+                    "cursor": "cursor"
+                },{
+                    "cursor": "cursor"
+                },{
+                    "cursor": "cursor"
+                },{
+                    "cursor": "aGVsbG9zLzQzMDBkOTVlLTExZmYtNGZmOS05NWI3LWNmNTQxOWEyMDc3MA=="
+                },]
+            },
+        },
+    });
+    // expect(Object.keys(data.edges)).toEqual(
+    //     expect.arrayContaining(["name", "lastname", "role", "age"])
+    // );
+    });
 
 });

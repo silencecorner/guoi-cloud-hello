@@ -11,6 +11,7 @@ import guoi.hello.graphql.types.hello.HelloEdge;
 import guoi.hello.grpc.client.HelloGrpcClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.yaml.snakeyaml.external.biz.base64Coder.Base64Coder;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -88,7 +89,7 @@ public class Query implements GraphQLQueryResolver {
             public void onHellosResponse(HellosResponse hellosResponse) {
                 HelloConnection helloConnection = new HelloConnection(new ArrayList<HelloEdge>() {{
                     hellosResponse.getHelloList().forEach(hello -> add(
-                            new HelloEdge("cursor",
+                            new HelloEdge(Base64Coder.encodeString(hello.getName()),
                                     Hello
                                             .builder()
                                             .id(hello.getName())

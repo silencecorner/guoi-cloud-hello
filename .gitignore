@@ -1,4 +1,10 @@
 # Created by .ignore support plugin (hsz.mobi)
+/out
+/build
 /.idea
 /.gradle
 ./guoi-micro-apis.iml
+./micro-hello-grpc/out
+./micro-hello-grpc/build
+./gateway-hello-graphql/out
+./gateway-hello-graphql/build
