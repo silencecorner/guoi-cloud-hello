@@ -44,6 +44,6 @@ public class MutationTests {
         log.debug("helloCreatePayload={}", helloCreatePayload);
 
         //Then
-        assertThat(helloCreatePayload.getHello().getId(), startsWith("ddhellos/"));
+        assertThat(helloCreatePayload.getHello().getId(), startsWith("hellos/"));
     }
 }
