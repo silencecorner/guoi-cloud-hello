@@ -80,7 +80,7 @@ gradle build --refresh-dependencies -x test
     "hellos": {
       "edges": [
         {
-          "cursor": "cursor",
+          "cursor": "aGVsbG9zLzk0ODFhODJjLWJiNDMtNGMzZi04OTE2LTUwMmM5NTFkMDdjZg==",
           "node": {
             "id": "hellos/9dbea423-e85d-4f44-a26b-b271295adce8",
             "message": "Hello conan, Welcome to Guoi Micro$!",
@@ -89,7 +89,7 @@ gradle build --refresh-dependencies -x test
           }
         },
         {
-          "cursor": "cursor",
+          "cursor": "aGVsbG9zLzlmZjU3NTlhLTc3YmItNDJkYi05NzJiLWFhOTg4NTdmNTdhMQ==",
           "node": {
             "id": "hellos/250f4442-368e-42d3-a18d-8aa71ad1f935",
             "message": "Hello conan1, Welcome to Guoi Micro$!",
