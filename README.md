@@ -55,7 +55,7 @@ gradle build --refresh-dependencies -x test
 ```
 
 # How it works
-## Step 1. open browser [http://localhost:9999/graphiql](http://localhost:9999/graphiql)	
+## Step 1. open browser [http://localhost:9000/graphiql](http://localhost:9000/graphiql)	
 ## Step 2. query 
 ### hellos query
 ```graphql
