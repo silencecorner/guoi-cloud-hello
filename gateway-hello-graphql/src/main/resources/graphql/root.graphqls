@@ -17,8 +17,14 @@ type Query {
     # Returns the last _n_ elements from the list.
     last: Int
 
-    # Ordering options for repositories returned from the connection
-    # orderBy: RepositoryOrder
+    # Skip the _n_ elements from the list.
+    skip: Int
+
+    # Filter condition
+    filter: HelloFilterInput
+
+    # Order options for hellos return from the connection
+    orderBy: HelloOrderByInput
 
   ): HelloConnection!
 

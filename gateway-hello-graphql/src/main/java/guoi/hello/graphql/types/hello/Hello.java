@@ -29,21 +29,17 @@ public class Hello {
     private String id;// id: ID!
 
     //    #Hello Person's first name
-    private String first_name;//    first_name: String!
+    private String firstName;//    firstName: String!
     //
     //            #Hello Person's last name
-    private String last_name;//    last_name: String!
+    private String lastName;//    lastName: String!
 
     // # The hello message
     private String message;// message: String!
 
-    private Date create_time; // catalog entity creation date time create_time: DateTime!
-    private Date update_time; // catalog entity update date time update_time: DateTime!
+    private Date createdAt; // catalog entity creation date time createAt: DateTime!
+    private Date updatedAt; // catalog entity update date time updateAt: DateTime!
 
-    //  # The customer’s default address.
-//    private Address defaultAddress;//            defaultAddress: Address
-
-//    private Image image;
 
 
     /**
@@ -88,7 +84,7 @@ public class Hello {
          * @return
          */
         public Builder firstName(String first_name) {
-            managedInstance.first_name = first_name;
+            managedInstance.firstName = first_name;
             return this;
         }
 
@@ -99,7 +95,7 @@ public class Hello {
          * @return
          */
         public Builder lastName(String last_name) {
-            managedInstance.last_name = last_name;
+            managedInstance.lastName = last_name;
             return this;
         }
 
@@ -121,18 +117,18 @@ public class Hello {
          * @return
          */
         public Builder createdAt(Date date) {
-            managedInstance.create_time = date;
+            managedInstance.createdAt = date;
             return this;
         }
 
         /**
-         * fluent setters for creatAt Datetime
+         * fluent setters for updateAt Datetime
          *
          * @param date
          * @return
          */
-        public Builder updateAt(Date date) {
-            managedInstance.update_time = date;
+        public Builder updatedAt(Date date) {
+            managedInstance.updatedAt = date;
             return this;
         }
 

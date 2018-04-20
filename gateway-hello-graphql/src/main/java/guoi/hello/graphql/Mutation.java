@@ -23,14 +23,14 @@ public class Mutation implements GraphQLMutationResolver {
     //    # 创建Hello
     //    hello0Create(input: HelloCreateInput!): HelloCreatePayload!
     public HelloCreatePayload hello0Create(HelloCreateInput input){
-       com.github.conanchen.guoi.cloud.hello.grpc.Hello grpcHello =  helloGrpcClient.createHello(input.getFirst_name(),input.getLast_name());
+       com.github.conanchen.guoi.cloud.hello.grpc.Hello grpcHello =  helloGrpcClient.createHello(input.getFirstName(),input.getLastName());
        return HelloCreatePayload.builder().hello( Hello.builder()
                .id(grpcHello.getName())
                .firstName(grpcHello.getFirstName())
                .lastName(grpcHello.getLastName())
                .message(grpcHello.getMessage())
                .createdAt(new Date(grpcHello.getCreateTime().getSeconds()))
-               .updateAt(new Date(grpcHello.getUpdateTime().getSeconds()))
+               .updatedAt(new Date(grpcHello.getUpdateTime().getSeconds()))
                .build()).build();
 
     }

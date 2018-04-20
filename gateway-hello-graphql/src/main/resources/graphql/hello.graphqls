@@ -4,19 +4,20 @@ type Hello implements Node {
   # Globally unique identifier.
   id: ID!
 
-    # The person's first name
-    first_name: String
-    # The person's last name
-    last_name: String
+  # The person's first name
+  firstName: String
+
+  # The person's last name
+  lastName: String
 
   # The hello message .
   message: String!
 
   # hello creation date time
-  create_time: DateTime!
+  createdAt: DateTime!
 
   # hello update date time
-  update_time: DateTime!
+  updatedAt: DateTime!
 
 }
 
@@ -40,11 +41,11 @@ type HelloEdge {
 
 # 创建Hello输入参数
 input HelloCreateInput{
-    #Hello Person's first name
-    first_name: String!
+  # The person's first name
+  firstName: String
 
-    #Hello Person's last name
-    last_name: String!
+  # The person's last name
+  lastName: String
 
 }
 
@@ -69,4 +70,82 @@ type HelloUpdatePayload {
 
   # List of errors that occurred executing the mutation.
   userErrors: [UserError!]!
+}
+
+
+input HelloFilterInput {
+  # logical operators
+  AND: [HelloFilterInput!] # combines all passed `HelloFilterInput` objects with logical AND
+  OR: [HelloFilterInput!] # combines all passed `HelloFilterInput` objects with logical OR
+
+  # ID filters
+  id: ID # matches all nodes with exact value
+  id_not: ID # matches all nodes with different value
+  id_in: [ID!] # matches all nodes with value in the passed list
+  id_not_in: [ID!] # matches all nodes with value not in the passed list
+  id_lt: ID # matches all nodes with lesser value
+  id_lte: ID # matches all nodes with lesser or equal value
+  id_gt: ID # matches all nodes with greater value
+  id_gte: ID # matches all nodes with greater or equal value
+  id_contains: ID # matches all nodes with a value that contains given substring
+  id_not_contains: ID # matches all nodes with a value that does not contain given substring
+  id_starts_with: ID # matches all nodes with a value that starts with given substring
+  id_not_starts_with: ID # matches all nodes with a value that does not start with given substring
+  id_ends_with: ID # matches all nodes with a value that ends with given substring
+  id_not_ends_with: ID # matches all nodes with a value that does not end with given substring
+
+  # createdAt DateTime filters
+  createdAt: DateTime # matches all nodes with exact value
+  createdAt_not: DateTime # matches all nodes with different value
+  createdAt_in: [DateTime!] # matches all nodes with value in the passed list
+  createdAt_not_in: [DateTime!] # matches all nodes with value not in the passed list
+  createdAt_lt: DateTime # matches all nodes with lesser value
+  createdAt_lte: DateTime # matches all nodes with lesser or equal value
+  createdAt_gt: DateTime # matches all nodes with greater value
+  createdAt_gte: DateTime # matches all nodes with greater or equal value
+
+  # updatedAt DateTime filters
+  updatedAt: DateTime # matches all nodes with exact value
+  updatedAt_not: DateTime # matches all nodes with different value
+  updatedAt_in: [DateTime!] # matches all nodes with value in the passed list
+  updatedAt_not_in: [DateTime!] # matches all nodes with value not in the passed list
+  updatedAt_lt: DateTime # matches all nodes with lesser value
+  updatedAt_lte: DateTime # matches all nodes with lesser or equal value
+  updatedAt_gt: DateTime # matches all nodes with greater value
+  updatedAt_gte: DateTime # matches all nodes with greater or equal value
+
+
+  # lastName String filters
+  lastName: String # matches all nodes with exact value
+  lastName_not: String # matches all nodes with different value
+  lastName_in: [String!] # matches all nodes with value in the passed list
+  lastName_not_in: [String!] # matches all nodes with value not in the passed list
+  lastName_lt: String # matches all nodes with lesser value
+  lastName_lte: String # matches all nodes with lesser or equal value
+  lastName_gt: String # matches all nodes with greater value
+  lastName_gte: String # matches all nodes with greater or equal value
+  lastName_contains: String # matches all nodes with a value that contains given substring
+  lastName_not_contains: String # matches all nodes with a value that does not contain given substring
+  lastName_starts_with: String # matches all nodes with a value that starts with given substring
+  lastName_not_starts_with: String # matches all nodes with a value that does not start with given substring
+  lastName_ends_with: String # matches all nodes with a value that ends with given substring
+  lastName_not_ends_with: String # matches all nodes with a value that does not end with given substring
+}
+
+# orderBy argument for every scalar field of Hello type: orderBy: _ASC or orderBy: _DESC.
+enum HelloOrderByInput {
+    id_ASC
+    id_DESC
+
+    firstName_ASC
+    firstName_DESC
+
+    lastName_ASC
+    lastName_DESC
+
+    updatedAt_ASC
+    updatedAt_DESC
+
+    createdAt_ASC
+    createdAt_DESC
 }

@@ -8,6 +8,8 @@ import com.github.conanchen.guoi.graphql.types.common.PageInfo;
 import guoi.hello.graphql.types.hello.Hello;
 import guoi.hello.graphql.types.hello.HelloConnection;
 import guoi.hello.graphql.types.hello.HelloEdge;
+import guoi.hello.graphql.types.hello.query.HelloFilterInput;
+import guoi.hello.graphql.types.hello.query.HelloOrderByInput;
 import guoi.hello.grpc.client.HelloGrpcClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
@@ -31,56 +33,21 @@ public class Query implements GraphQLQueryResolver {
     }
 
 
-//    public HelloConnection hellos(
-////          # Returns the elements in the list that come after the specified global ID.
-//            String after,//            after: String
-////
-////            # Returns the elements in the list that come before the specified global ID.
-//            String before,//            before: String
-////
-////            # Returns the first _n_ elements from the list.
-//            Integer first,//            first: Int
-////
-////            # Returns the last _n_ elements from the list.
-//            Integer last//            last: Int
-////
-////            # Ordering options for repositories returned from the connection
-////            # orderBy: RepositoryOrder
-//
-//    ) {
-//        List<Hello> helloList = helloGrpcClient.getHellos();
-//        return new HelloConnection(new ArrayList<HelloEdge>() {{
-//            helloList.forEach(hello -> add(
-//                    new HelloEdge("cursor",
-//                            com.bdgx.guoi.shopiebackend.graphql.types.hello.Hello
-//                                    .builder()
-//                                    .id(hello.getName())
-//                                    .message(hello.getMessage())
-//                                    .createdAt(new Date(hello.getCreateTime().getSeconds()))
-//                                    .updateAt(new Date(hello.getUpdateTime().getSeconds()))
-//                                    .build())
-//                    )
-//            );
-//        }}, new PageInfo("end", Boolean.FALSE, Boolean.FALSE, "start"));
-//    }
-
-
     public Future<HelloConnection> hellos(
-//          # Returns the elements in the list that come after the specified global ID.
-            String after,//            after: String
-//
-//            # Returns the elements in the list that come before the specified global ID.
-            String before,//            before: String
-//
-//            # Returns the first _n_ elements from the list.
-            Integer first,//            first: Int
-//
-//            # Returns the last _n_ elements from the list.
-            Integer last//            last: Int
-//
-//            # Ordering options for repositories returned from the connection
-//            # orderBy: RepositoryOrder
-
+            //# Returns the elements in the list that come after the specified global ID.
+            String after,//after: String
+            //  # Returns the elements in the list that come before the specified global ID.
+            String before,//before: String
+            //  # Returns the first _n_ elements from the list.
+            Integer first,//first: Int
+            //  # Returns the last _n_ elements from the list.
+            Integer last,//last: Int
+            //  # Skip the _n_ elements from the list.
+            Integer skip,//skip: Int
+            //# Filter condition
+            HelloFilterInput filter,// filter: HelloFilterInput
+            //# Order options for hellos return from the connection
+            HelloOrderByInput orderBy//  orderBy: HelloOrderByInput
     ) {
         CompletableFuture<HelloConnection> completableFuture
                 = new CompletableFuture<>();
@@ -97,7 +64,7 @@ public class Query implements GraphQLQueryResolver {
                                             .lastName(hello.getLastName())
                                             .message(hello.getMessage())
                                             .createdAt(new Date(hello.getCreateTime().getSeconds()))
-                                            .updateAt(new Date(hello.getUpdateTime().getSeconds()))
+                                            .updatedAt(new Date(hello.getUpdateTime().getSeconds()))
                                             .build())
                             )
                     );
@@ -109,53 +76,53 @@ public class Query implements GraphQLQueryResolver {
     }
 //
 //    public Future<HelloConnection> hellos(
-////          # Returns the elements in the list that come after the specified global ID.
-//            String after,//            after: String
+////# Returns the elements in the list that come after the specified global ID.
+//String after,//after: String
 ////
-////            # Returns the elements in the list that come before the specified global ID.
-//            String before,//            before: String
+////  # Returns the elements in the list that come before the specified global ID.
+//String before,//before: String
 ////
-////            # Returns the first _n_ elements from the list.
-//            Integer first,//            first: Int
+////  # Returns the first _n_ elements from the list.
+//Integer first,//first: Int
 ////
-////            # Returns the last _n_ elements from the list.
-//            Integer last//            last: Int
+////  # Returns the last _n_ elements from the list.
+//Integer last//last: Int
 ////
-////            # Ordering options for repositories returned from the connection
-////            # orderBy: RepositoryOrder
+////  # Ordering options for repositories returned from the connection
+////  # orderBy: RepositoryOrder
 //
 //    ) {
 //
 //        CompletableFuture<HelloConnection> completableFuture
-//                = new CompletableFuture<>();
+//    = new CompletableFuture<>();
 //
 //        Executors.newCachedThreadPool().submit(() -> {
-//            Thread.sleep(500);
-//            HelloConnection helloConnection = new HelloConnection(new ArrayList<HelloEdge>(){{
-//                add(new HelloEdge("cursor1", com.bdgx.guoi.shopiebackend.graphql.types.hello.Hello
-//                        .builder()
-//                        .id("id1")
-//                        .message("message1")
-//                        .createdAt(new Date())
-//                        .updateAt(new Date())
-//                        .build()));
-//                add(new HelloEdge("cursor2", com.bdgx.guoi.shopiebackend.graphql.types.hello.Hello
-//                        .builder()
-//                        .id("id2")
-//                        .message("message2")
-//                        .createdAt(new Date())
-//                        .updateAt(new Date())
-//                        .build()));
-//                add(new HelloEdge("cursor3", com.bdgx.guoi.shopiebackend.graphql.types.hello.Hello
-//                        .builder()
-//                        .id("id3")
-//                        .message("message3")
-//                        .createdAt(new Date())
-//                        .updateAt(new Date())
-//                        .build()));
-//            }}, new PageInfo("end", Boolean.FALSE, Boolean.FALSE, "start"));
-//            completableFuture.complete(helloConnection);
-//            return null;
+//Thread.sleep(500);
+//HelloConnection helloConnection = new HelloConnection(new ArrayList<HelloEdge>(){{
+//    add(new HelloEdge("cursor1", com.bdgx.guoi.shopiebackend.graphql.types.hello.Hello
+//.builder()
+//.id("id1")
+//.message("message1")
+//.createdAt(new Date())
+//.updateAt(new Date())
+//.build()));
+//    add(new HelloEdge("cursor2", com.bdgx.guoi.shopiebackend.graphql.types.hello.Hello
+//.builder()
+//.id("id2")
+//.message("message2")
+//.createdAt(new Date())
+//.updateAt(new Date())
+//.build()));
+//    add(new HelloEdge("cursor3", com.bdgx.guoi.shopiebackend.graphql.types.hello.Hello
+//.builder()
+//.id("id3")
+//.message("message3")
+//.createdAt(new Date())
+//.updateAt(new Date())
+//.build()));
+//}}, new PageInfo("end", Boolean.FALSE, Boolean.FALSE, "start"));
+//completableFuture.complete(helloConnection);
+//return null;
 //        });
 //
 //        return completableFuture;

@@ -60,14 +60,14 @@ gradle build --refresh-dependencies -x test
 ### hellos query
 ```graphql
 {
-  hellos(after: "cursor") {
+  hellos(first: 3) {
     edges {
       cursor
       node {
         id
+        lastName
+        firstName
         message
-        create_time
-        update_time
       }
     }
   }
@@ -82,19 +82,19 @@ gradle build --refresh-dependencies -x test
         {
           "cursor": "aGVsbG9zLzk0ODFhODJjLWJiNDMtNGMzZi04OTE2LTUwMmM5NTFkMDdjZg==",
           "node": {
-            "id": "hellos/9dbea423-e85d-4f44-a26b-b271295adce8",
-            "message": "Hello conan, Welcome to Guoi Micro$!",
-            "create_time": "2018-04-05T04:54:01.001Z",
-            "update_time": "2018-04-05T04:54:01.001Z"
+            "id": "hellos/9481a82c-bb43-4c3f-8916-502c951d07cf",
+            "lastName": "unknown",
+            "firstName": "unknown",
+            "message": "Hello conan, Welcome to Guoi Micro$!"
           }
         },
         {
           "cursor": "aGVsbG9zLzlmZjU3NTlhLTc3YmItNDJkYi05NzJiLWFhOTg4NTdmNTdhMQ==",
           "node": {
-            "id": "hellos/250f4442-368e-42d3-a18d-8aa71ad1f935",
-            "message": "Hello conan1, Welcome to Guoi Micro$!",
-            "create_time": "2018-04-05T04:54:12.918Z",
-            "update_time": "2018-04-05T04:54:12.918Z"
+            "id": "hellos/9ff5759a-77bb-42db-972b-aa98857f57a1",
+            "lastName": "unknown",
+            "firstName": "unknown",
+            "message": "Hello lihai, Welcome to Guoi Micro$!"
           }
         }
       ]
@@ -106,12 +106,12 @@ gradle build --refresh-dependencies -x test
 ### hello create 
 - mutation
 ```graphql
-mutation ($input: HelloCreateInput!) {
-  hello0Create(input: $input) {
-    hello {
+mutation ($input:HelloCreateInput!){
+  hello0Create(input:$input){
+    hello{
       id
-      first_name
-      last_name
+      firstName
+      lastName
       message
     }
   }
@@ -120,10 +120,10 @@ mutation ($input: HelloCreateInput!) {
 - Query Variables
 ```graphql
 {
-    "input": {
-		"first_name": "conan",
-  		"last_name": "chen"
-  	}
+  "input": {
+    "firstName":  "conan",
+    "lastName":  "chen"
+  }
 }
 ```
 
