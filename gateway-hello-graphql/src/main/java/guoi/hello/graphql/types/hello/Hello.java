@@ -28,6 +28,12 @@ public class Hello {
     //  # Globally unique identifier.
     private String id;// id: ID!
 
+    //    #Hello Person's first name
+    private String first_name;//    first_name: String!
+    //
+    //            #Hello Person's last name
+    private String last_name;//    last_name: String!
+
     // # The hello message
     private String message;// message: String!
 
@@ -76,7 +82,29 @@ public class Hello {
         }
 
         /**
-         * fluent setters for title
+         * fluent setters for first_name
+         *
+         * @param first_name
+         * @return
+         */
+        public Builder firstName(String first_name) {
+            managedInstance.first_name = first_name;
+            return this;
+        }
+
+        /**
+         * fluent setters for last_name
+         *
+         * @param last_name
+         * @return
+         */
+        public Builder lastName(String last_name) {
+            managedInstance.last_name = last_name;
+            return this;
+        }
+
+        /**
+         * fluent setters for message
          *
          * @param message
          * @return
@@ -111,6 +139,7 @@ public class Hello {
 
         /**
          * build
+         *
          * @return
          */
         public Hello build() {

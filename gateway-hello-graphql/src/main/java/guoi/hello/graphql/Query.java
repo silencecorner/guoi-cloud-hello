@@ -2,7 +2,7 @@ package guoi.hello.graphql;
 
 
 import com.coxautodev.graphql.tools.GraphQLQueryResolver;
-import com.github.conanchen.guoi.cloud.hello.grpc.HellosResponse;
+import com.github.conanchen.guoi.cloud.hello.grpc.ListHellosResponse;
 import com.github.conanchen.guoi.graphql.types.ZGuoiCommonTypes;
 import com.github.conanchen.guoi.graphql.types.common.PageInfo;
 import guoi.hello.graphql.types.hello.Hello;
@@ -86,13 +86,15 @@ public class Query implements GraphQLQueryResolver {
                 = new CompletableFuture<>();
         helloGrpcClient.getAsyncHellos(new HelloGrpcClient.HellosCallback() {
             @Override
-            public void onHellosResponse(HellosResponse hellosResponse) {
+            public void onHellosResponse(ListHellosResponse hellosResponse) {
                 HelloConnection helloConnection = new HelloConnection(new ArrayList<HelloEdge>() {{
                     hellosResponse.getHelloList().forEach(hello -> add(
                             new HelloEdge(Base64Coder.encodeString(hello.getName()),
                                     Hello
                                             .builder()
                                             .id(hello.getName())
+                                            .firstName(hello.getFirstName())
+                                            .lastName(hello.getLastName())
                                             .message(hello.getMessage())
                                             .createdAt(new Date(hello.getCreateTime().getSeconds()))
                                             .updateAt(new Date(hello.getUpdateTime().getSeconds()))

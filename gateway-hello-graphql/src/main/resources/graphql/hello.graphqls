@@ -4,6 +4,11 @@ type Hello implements Node {
   # Globally unique identifier.
   id: ID!
 
+    # The person's first name
+    first_name: String
+    # The person's last name
+    last_name: String
+
   # The hello message .
   message: String!
 
@@ -35,8 +40,11 @@ type HelloEdge {
 
 # 创建Hello输入参数
 input HelloCreateInput{
-    #Hello name
-    name: String!
+    #Hello Person's first name
+    first_name: String!
+
+    #Hello Person's last name
+    last_name: String!
 
 }
 

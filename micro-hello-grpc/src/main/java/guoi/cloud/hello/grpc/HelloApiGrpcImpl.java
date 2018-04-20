@@ -1,6 +1,7 @@
 package guoi.cloud.hello.grpc;
 
 import com.github.conanchen.guoi.cloud.hello.grpc.*;
+import com.google.common.base.Strings;
 import com.google.gson.Gson;
 import com.google.protobuf.Timestamp;
 import guoi.cloud.hello.mongo.HelloMongo;
@@ -25,17 +26,22 @@ public class HelloApiGrpcImpl extends HelloApiGrpc.HelloApiImplBase {
     private HelloMongoRepository helloMongoRepository;
 
     @Override
-    public void createHello(HelloRequest request, StreamObserver<Hello> responseObserver) {
+    public void createHello(CreateHelloRequest request, StreamObserver<Hello> responseObserver) {
         helloMongoRepository.save(
                 HelloMongo.builder()
                         .name(String.format("hellos/%s", UUID.randomUUID().toString()))
-                        .message(String.format("Hello %s, Welcome to Guoi Micro$!", request.getName()))
+                        .firstName(request.getFirstName())
+                        .lastName(request.getLastName())
+                        .message(String.format("Hello %s %s, Welcome to Guoi Micro$!",
+                                request.getLastName(), request.getFirstName()))
                         .createdAt(new Date())
                         .updateAt(new Date())
                         .build()
         ).subscribe(helloMongo -> {
             responseObserver.onNext(Hello.newBuilder()
                     .setName(helloMongo.getName())
+                    .setFirstName(Strings.isNullOrEmpty(helloMongo.getFirst_name())?"unknown":helloMongo.getFirst_name())
+                    .setLastName(Strings.isNullOrEmpty(helloMongo.getLast_name())?"unknown":helloMongo.getLast_name())
                     .setMessage(helloMongo.getMessage())
                     .setCreateTime(Timestamp.newBuilder().setSeconds(helloMongo.getCreate_time().getTime()).build())
                     .setUpdateTime(Timestamp.newBuilder().setSeconds(helloMongo.getUpdate_time().getTime()).build())
@@ -45,19 +51,21 @@ public class HelloApiGrpcImpl extends HelloApiGrpc.HelloApiImplBase {
     }
 
     @Override
-    public void listHellos(ListHellosRequest request, StreamObserver<HellosResponse> responseObserver) {
+    public void listHellos(ListHellosRequest request, StreamObserver<ListHellosResponse> responseObserver) {
         helloMongoRepository
                 .findAll()
                 .map(helloMongo -> Hello
                         .newBuilder()
                         .setName(helloMongo.getName())
+                        .setFirstName(Strings.isNullOrEmpty(helloMongo.getFirst_name())?"unknown":helloMongo.getFirst_name())
+                        .setLastName(Strings.isNullOrEmpty(helloMongo.getLast_name())?"unknown":helloMongo.getLast_name())
                         .setMessage(helloMongo.getMessage())
                         .setCreateTime(Timestamp.newBuilder().setSeconds(helloMongo.getCreate_time().getTime()).build())
                         .setUpdateTime(Timestamp.newBuilder().setSeconds(helloMongo.getUpdate_time().getTime()).build())
                         .build())
                 .toList(10)
                 .subscribe(hellos -> {
-                    responseObserver.onNext(HellosResponse.newBuilder()
+                    responseObserver.onNext(ListHellosResponse.newBuilder()
                             .addAllHello(hellos)
                             .build());
                     responseObserver.onCompleted();

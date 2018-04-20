@@ -17,7 +17,7 @@ public class HelloGrpcClient {
 
 
     public interface HellosCallback {
-        void onHellosResponse(HellosResponse hellosResponse);
+        void onHellosResponse(ListHellosResponse hellosResponse);
     }
 
     private static final Gson gson = new Gson();
@@ -35,14 +35,14 @@ public class HelloGrpcClient {
                 .build();
     }
 
-    public Hello createHello(String helloname) {
+    public Hello createHello(String firstName , String lastName) {
         ManagedChannel channel = getManagedChannel();
 
         ConnectivityState connectivityState = channel.getState(true);
         System.out.println(String.format("getHellos connectivityState = [%s]", gson.toJson(connectivityState)));
 
         HelloApiGrpc.HelloApiBlockingStub helloApiBlockingStub = HelloApiGrpc.newBlockingStub(channel);
-        return helloApiBlockingStub.createHello(HelloRequest.newBuilder().setName(helloname).build());
+        return helloApiBlockingStub.createHello(CreateHelloRequest.newBuilder().setFirstName(firstName).setLastName(lastName).build());
     }
 
     public List<Hello> getHellos() {
@@ -62,9 +62,9 @@ public class HelloGrpcClient {
         System.out.println(String.format("getHellos connectivityState = [%s]", gson.toJson(connectivityState)));
 
         HelloApiGrpc.HelloApiStub helloApiStub = HelloApiGrpc.newStub(channel);
-        helloApiStub.listHellos(ListHellosRequest.newBuilder().build(), new StreamObserver<HellosResponse>() {
+        helloApiStub.listHellos(ListHellosRequest.newBuilder().build(), new StreamObserver<ListHellosResponse>() {
             @Override
-            public void onNext(HellosResponse value) {
+            public void onNext(ListHellosResponse value) {
                 callback.onHellosResponse(value);
             }
 

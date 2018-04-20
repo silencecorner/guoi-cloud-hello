@@ -8,7 +8,10 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class HelloCreateInput {
-    //    #Hello name
-    private   String name;//    name: String!
+    //    #Hello Person's first name
+    private String first_name;//    first_name: String!
+
+    //            #Hello Person's last name
+    private String last_name;//    last_name: String!
 
 }

@@ -106,13 +106,13 @@ gradle build --refresh-dependencies -x test
 ### hello create 
 - mutation
 ```graphql
-mutation ($input:HelloCreateInput!){
-  hello0Create(input:$input){
-    hello{
+mutation ($input: HelloCreateInput!) {
+  hello0Create(input: $input) {
+    hello {
       id
+      first_name
+      last_name
       message
-      create_time
-      update_time
     }
   }
 }
@@ -120,7 +120,10 @@ mutation ($input:HelloCreateInput!){
 - Query Variables
 ```graphql
 {
-  "input": {"name": "conan"}
+    "input": {
+		"first_name": "conan",
+  		"last_name": "chen"
+  	}
 }
 ```
 
@@ -131,7 +134,7 @@ mutation ($input:HelloCreateInput!){
     "hello0Create": {
       "hello": {
         "id": "hellos/83ffb798-f44b-42ae-beca-036a1b486b96",
-        "message": "Hello conan, Welcome to Guoi Micro$!",
+        "message": "Hello chen conan, Welcome to Guoi Micro$!",
         "create_time": "2018-04-06T07:36:10.935Z",
         "update_time": "2018-04-06T07:36:10.935Z"
       }
