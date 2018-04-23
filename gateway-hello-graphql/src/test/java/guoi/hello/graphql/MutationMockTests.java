@@ -5,7 +5,6 @@ import com.google.protobuf.Timestamp;
 import guoi.hello.graphql.types.hello.mutation.HelloCreateInput;
 import guoi.hello.graphql.types.hello.mutation.HelloCreatePayload;
 import guoi.hello.grpc.client.HelloGrpcClient;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,7 +40,7 @@ public class MutationMockTests {
     @Test
     public void test_createHello_then_return_hello() throws Exception {
         //Given
-        when(helloGrpcClient.createHello(anyString()))
+        when(helloGrpcClient.createHello(anyString(),anyString()))
                 .thenReturn(Hello.newBuilder()
                         .setName("hellos/123")
                         .setMessage("hello " + anyString())
@@ -50,7 +49,7 @@ public class MutationMockTests {
                         .build());
 
         //When
-        HelloCreatePayload helloCreatePayload = mutation.hello0Create(new HelloCreateInput("conan"));
+        HelloCreatePayload helloCreatePayload = mutation.hello0Create(new HelloCreateInput("Conan","Chen"));
 
         //Then
         assertThat(helloCreatePayload.getHello().getId(), startsWith("hellos/"));

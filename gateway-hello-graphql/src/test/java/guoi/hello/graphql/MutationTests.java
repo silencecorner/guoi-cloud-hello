@@ -1,7 +1,6 @@
 package guoi.hello.graphql;
 
 import guoi.cloud.hello.HelloMicroApplication;
-import guoi.cloud.hello.grpc.HelloApiGrpcImpl;
 import guoi.hello.HelloGatewayApplication;
 import guoi.hello.graphql.types.hello.mutation.HelloCreateInput;
 import guoi.hello.graphql.types.hello.mutation.HelloCreatePayload;
@@ -40,7 +39,7 @@ public class MutationTests {
 
 
         //When
-        HelloCreatePayload helloCreatePayload = mutation.hello0Create(new HelloCreateInput("conan"));
+        HelloCreatePayload helloCreatePayload = mutation.hello0Create(new HelloCreateInput("Conan","Chen"));
         log.debug("helloCreatePayload={}", helloCreatePayload);
 
         //Then

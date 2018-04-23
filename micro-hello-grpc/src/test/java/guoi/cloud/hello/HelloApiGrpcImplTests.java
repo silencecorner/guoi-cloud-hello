@@ -1,8 +1,8 @@
 package guoi.cloud.hello;
 
+import com.github.conanchen.guoi.cloud.hello.grpc.CreateHelloRequest;
 import com.github.conanchen.guoi.cloud.hello.grpc.Hello;
 import com.github.conanchen.guoi.cloud.hello.grpc.HelloApiGrpc;
-import com.github.conanchen.guoi.cloud.hello.grpc.HelloRequest;
 import guoi.cloud.hello.grpc.HelloApiGrpcImpl;
 import guoi.cloud.hello.mongo.HelloMongoRepository;
 import io.grpc.testing.GrpcServerRule;
@@ -47,13 +47,14 @@ public class HelloApiGrpcImplTests {
 
         HelloApiGrpc.HelloApiBlockingStub blockingStub =
                 HelloApiGrpc.newBlockingStub(grpcServerRule.getChannel());
-        String testName = "test name";
+        String firstName = "Conan";
+        String lastName = "Chen";
 
         //When
-        Hello reply = blockingStub.createHello(HelloRequest.newBuilder().setName(testName).build());
+        Hello reply = blockingStub.createHello(CreateHelloRequest.newBuilder().setFirstName(firstName).setLastName(lastName).build());
 
         //Then
         assertThat(reply.getName(), startsWith("hellos/"));
-        assertThat(reply.getMessage(), containsString(testName));
+        assertThat(reply.getMessage(), containsString(firstName));
     }
 }

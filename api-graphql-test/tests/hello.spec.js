@@ -6,7 +6,7 @@ global.XMLHttpRequest = XMLHttpRequest;
 describe('hellos', () => {
     test('hellos', async() =>{
     const response = await
-    axios.post('http://localhost:9999/graphql', {
+    axios.post('http://localhost:9000/graphql', {
         query: `
         {
           hellos(after: "cursor") {

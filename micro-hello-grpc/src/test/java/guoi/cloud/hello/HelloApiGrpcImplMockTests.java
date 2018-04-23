@@ -1,8 +1,8 @@
 package guoi.cloud.hello;
 
+import com.github.conanchen.guoi.cloud.hello.grpc.CreateHelloRequest;
 import com.github.conanchen.guoi.cloud.hello.grpc.Hello;
 import com.github.conanchen.guoi.cloud.hello.grpc.HelloApiGrpc;
-import com.github.conanchen.guoi.cloud.hello.grpc.HelloRequest;
 import guoi.cloud.hello.grpc.HelloApiGrpcImpl;
 import guoi.cloud.hello.mongo.HelloMongo;
 import guoi.cloud.hello.mongo.HelloMongoRepository;
@@ -12,7 +12,6 @@ import io.reactivex.SingleObserver;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -20,11 +19,10 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.Date;
 
-import static org.mockito.Mockito.any;
-import static org.mockito.Mockito.when;
 import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.startsWith;
 import static org.junit.Assert.assertThat;
+import static org.mockito.Mockito.any;
 import static org.mockito.Mockito.when;
 
 @RunWith(SpringRunner.class)
@@ -69,13 +67,14 @@ public class HelloApiGrpcImplMockTests {
 
         HelloApiGrpc.HelloApiBlockingStub blockingStub =
                 HelloApiGrpc.newBlockingStub(grpcServerRule.getChannel());
-        String testName = "test name";
+        String firstName = "Conan";
+        String lastName = "Chen";
 
         //When
-        Hello reply = blockingStub.createHello(HelloRequest.newBuilder().setName(testName).build());
+        Hello reply = blockingStub.createHello(CreateHelloRequest.newBuilder().setFirstName(firstName).setLastName(lastName).build());
 
         //Then
         assertThat(reply.getName(), startsWith("hellos/"));
-        assertThat(reply.getMessage(), containsString(testName));
+        assertThat(reply.getMessage(), containsString(firstName));
     }
 }
