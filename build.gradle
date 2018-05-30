@@ -66,10 +66,12 @@ subprojects {
     }
 
 }
+
 repositories {
     mavenCentral()
-    jcenter()
-    maven { url 'https://jitpack.io' }
+    maven { url "http://192.168.1.41:8081/nexus/content/repositories/central" }
+    maven { url "http://192.168.1.41:8081/nexus/content/repositories/releases" }
+    maven { url "http://192.168.1.41:8081/nexus/content/repositories/snapshots" }
 }
 
 configurations.all {

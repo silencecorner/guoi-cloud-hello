@@ -4,11 +4,16 @@ plugins {
     id 'org.springframework.boot'
     id "io.spring.dependency-management"
 }
+
 repositories {
+    maven { url "http://192.168.1.250:8081/nexus/content/repositories/central" }
+    maven { url "http://192.168.1.250:8081/nexus/content/repositories/releases" }
+    maven { url "http://192.168.1.250:8081/nexus/content/repositories/snapshots" }
     mavenCentral()
     jcenter()
     maven { url 'https://jitpack.io' }
 }
+
 
 
 
