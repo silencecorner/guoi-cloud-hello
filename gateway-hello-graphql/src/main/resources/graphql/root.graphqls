@@ -3,18 +3,20 @@
 type Query {
 
   # A list of hello.
+  # - to seek forwards, use first; specify a starting node with after.
+  # - to seek backwards, use last; specify a starting node with before.
   hellos(
 
-    # Returns the elements in the list that come after the specified global ID.
+    # seek forwards: Returns the elements in the list that come after the specified global ID.
     after: String
 
-    # Returns the elements in the list that come before the specified global ID.
+    # seek backwards: Returns the elements in the list that come before the specified global ID.
     before: String
 
-    # Returns the first _n_ elements from the list.
+    # seek forwards: Returns the first _n_ elements from the list.
     first: Int
 
-    # Returns the last _n_ elements from the list.
+    # seek backwards: Returns the last _n_ elements from the list.
     last: Int
 
     # Skip the _n_ elements from the list.
