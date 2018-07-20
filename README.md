@@ -183,16 +183,16 @@ The webhook will trigger a build for branches that you have previously used with
 - micro-hello-grpc
     >通过mongodb:27017 访问数据库，MongoDB的也是通过istio转发的
     ##### 微服务设置
-```
-# grpc端口（http2)
-grpc.port=6565
-# tomcat端口,可访问监控metric数据（http1.1)    
-server.port=6566
-# mongodb的访问地址，通过istio转发
-spring.data.mongodb.host=mongodb
-# mongodb的端口
-spring.data.mongodb.port=27017
-# 数据库名称
-spring.data.mongodb.database=hello-db
-
-```
+    ```
+    # grpc端口（http2)
+    grpc.port=6565
+    # tomcat端口,可访问监控metric数据（http1.1)    
+    server.port=6566
+    # mongodb的访问地址，通过istio转发
+    spring.data.mongodb.host=mongodb
+    # mongodb的端口
+    spring.data.mongodb.port=27017
+    # 数据库名称
+    spring.data.mongodb.database=hello-db
+    
+    ```
