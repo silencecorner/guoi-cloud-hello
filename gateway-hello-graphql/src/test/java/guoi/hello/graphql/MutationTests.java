@@ -1,6 +1,5 @@
 package guoi.hello.graphql;
 
-import guoi.cloud.hello.HelloMicroApplication;
 import guoi.hello.HelloGatewayApplication;
 import guoi.hello.graphql.types.hello.mutation.HelloCreateInput;
 import guoi.hello.graphql.types.hello.mutation.HelloCreatePayload;
@@ -16,8 +15,7 @@ import static org.hamcrest.Matchers.startsWith;
 import static org.junit.Assert.assertThat;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes = {HelloGatewayApplication.class,
-        HelloMicroApplication.class},
+@SpringBootTest(classes = {HelloGatewayApplication.class},
         webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT,
         properties = "grpc.port=0")
 
