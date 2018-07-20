@@ -170,3 +170,29 @@ The webhook will trigger a build for branches that you have previously used with
 # Pagination
 ## [Paginating Real-Time Data with Cursor Based Pagination](https://www.sitepoint.com/paginating-real-time-data-cursor-based-pagination/)
 ## [Pagination: You're (Probably) Doing It Wrong.](https://coderwall.com/p/lkcaag/pagination-you-re-probably-doing-it-wrong)
+# istio 部署
+- gateway-hello-graphql
+    > 在网关中直接使用grpc的service name访问：service-hello.beidougx.com
+    ##### 网关设置
+  ```
+  # 微服务地址，访问端口为6565
+  helloServiceHost = service-hello.beidougx.com
+  # 本网关的端口
+  server.port=6565
+  ```
+- micro-hello-grpc
+    >通过mongodb:27017 访问数据库，MongoDB的也是通过istio转发的
+    ##### 微服务设置
+```
+# grpc端口（http2)
+grpc.port=6565
+# tomcat端口,可访问监控metric数据（http1.1)    
+server.port=6566
+# mongodb的访问地址，通过istio转发
+spring.data.mongodb.host=mongodb
+# mongodb的端口
+spring.data.mongodb.port=27017
+# 数据库名称
+spring.data.mongodb.database=hello-db
+
+```
