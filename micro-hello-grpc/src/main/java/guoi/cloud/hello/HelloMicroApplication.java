@@ -15,7 +15,7 @@ import org.springframework.data.mongodb.repository.config.EnableReactiveMongoRep
 public class HelloMicroApplication extends AbstractReactiveMongoConfiguration {
 
     @Value("spring.data.mongodb.host") private String host;
-    @Value("spring.data.mongodb.port") private Integer port;
+    @Value("spring.data.mongodb.port") private String port;
     public static void main(String[] args) {
         SpringApplication.run(HelloMicroApplication.class, args);
     }
@@ -23,7 +23,7 @@ public class HelloMicroApplication extends AbstractReactiveMongoConfiguration {
     @Override
     @Bean
     public MongoClient reactiveMongoClient() {
-        return MongoClients.create(String.format("mongodb://%s:%d", host,port));
+        return MongoClients.create(String.format("mongodb://%s:%d", host,Integer.valueOf(port)));
     }
 
     @Override
