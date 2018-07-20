@@ -68,7 +68,7 @@ public class Query implements GraphQLQueryResolver {
                                             .build())
                             )
                     );
-                }}, new PageInfo("end", Boolean.FALSE, Boolean.FALSE, "start",0));
+                }}, PageInfo.builder().endCursor("end").startCursor("start").hasNextPage(Boolean.FALSE).hasPreviousPage(Boolean.FALSE).totalCount(1).build());
                 completableFuture.complete(helloConnection);
             }
         });
