@@ -196,3 +196,43 @@ The webhook will trigger a build for branches that you have previously used with
     spring.data.mongodb.database=hello-db
     
     ```
+- 日志配置
+    > 这里的日志使用了EFk：elasticsearch、fluentd、kibana，使用了fluentd代替常见的logstash做为日志收集器。
+    日志收集器也是要通过istio控制，使用service-fluentd.beidougx.com作为服务名称。
+    ##### 日志搜集配置
+    ###### 依赖
+    ```
+    compile 'org.fluentd:fluent-logger:0.3.2'
+    compile 'com.sndyuk:logback-more-appenders:1.1.1'
+    ``` 
+    ###### logback.xml
+    ```
+    <?xml version="1.0" encoding="UTF-8"?>
+    <configuration>
+        <include resource="org/springframework/boot/logging/logback/base.xml"/>
+        <property name="FLUENTD_HOST" value="${FLUENTD_HOST:-${DOCKER_HOST:-log\-fluentd.beidougx.com}}"/>
+        <property name="FLUENTD_PORT" value="${FLUENTD_PORT:-24224}"/>
+        <appender name="FLUENT" class="ch.qos.logback.more.appenders.DataFluentAppender">
+            <tag>dab</tag>
+            <label>normal</label>
+            <remoteHost>${FLUENTD_HOST}</remoteHost>
+            <port>${FLUENTD_PORT}</port>
+            <maxQueueSize>20</maxQueueSize>
+        </appender>
+    
+        <logger name="fluentd" level="debug" additivity="false">
+            <appender-ref ref="CONSOLE" />
+            <appender-ref ref="FILE" />
+            <appender-ref ref="FLUENT" />
+        </logger>
+    </configuration>
+    ```
+    ###### fluentd地址
+    - host
+    ```
+    log-fluentd.beidougx.com
+    ```
+    - port
+    ```
+    24224
+    ```
