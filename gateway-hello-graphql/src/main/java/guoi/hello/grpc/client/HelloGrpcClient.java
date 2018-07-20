@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.logging.Logger;
 
 public class HelloGrpcClient {
-    @Value("helloServiceHost")
+    @Value("${helloServiceHost}")
     private String helloServiceHost;
 
     private final static Logger logger = Logger.getLogger(HelloGrpcClient.class.getSimpleName());
