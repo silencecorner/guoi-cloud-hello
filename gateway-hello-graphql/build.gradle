@@ -18,7 +18,7 @@ repositories {
 
 dependencies {
 
-    compile ('com.github.conanchen:guoi-graphql-java:master-SNAPSHOT'){ changing = true }
+    compile ('com.github.conanchen:graphql-java-common:master-SNAPSHOT'){ changing = true }
     compile ('com.github.conanchen.guoi-micro-apis:hello-grpc-java:master-SNAPSHOT'){ changing = true }
 
     compile("com.graphql-java:graphql-spring-boot-starter:${GRAPHQL_SPRINT_BOOT_STARTER_VERSION}")

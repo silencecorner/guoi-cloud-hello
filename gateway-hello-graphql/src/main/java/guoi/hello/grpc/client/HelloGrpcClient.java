@@ -7,11 +7,14 @@ import io.grpc.ManagedChannel;
 import io.grpc.health.v1.HealthCheckRequest;
 import io.grpc.netty.NettyChannelBuilder;
 import io.grpc.stub.StreamObserver;
+import org.springframework.beans.factory.annotation.Value;
 
 import java.util.List;
 import java.util.logging.Logger;
 
 public class HelloGrpcClient {
+    @Value("helloServiceHost")
+    private String helloServiceHost;
 
     private final static Logger logger = Logger.getLogger(HelloGrpcClient.class.getSimpleName());
 
@@ -29,7 +32,7 @@ public class HelloGrpcClient {
 
     private ManagedChannel getManagedChannel() {
         return NettyChannelBuilder
-                .forAddress("127.0.0.1", 6565)
+                .forAddress(helloServiceHost, 6565)
                 .usePlaintext(true)
                 //                .keepAliveTime(60, TimeUnit.SECONDS)
                 .build();
