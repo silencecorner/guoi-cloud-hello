@@ -50,9 +50,8 @@ public class LogRunner implements CommandLineRunner {
     }
 
     private String randomMessage() {
-      /* Map  map = restTemplate.getForObject("http://api.icndb.com/jokes/random", Map.class,new Object());
+      Map  map = restTemplate.getForObject("http://api.icndb.com/jokes/random", Map.class,new Object());
        Map map1 = (Map)map.get("value");
-       return map1.get("joke").toString();*/
-      return "testing random Message" + random.nextInt();
+       return map1.get("joke").toString();
     }
 }
