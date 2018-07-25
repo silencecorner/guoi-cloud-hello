@@ -1,8 +1,6 @@
 package guoi.hello;
 
-import lombok.extern.log4j.Log4j;
 import lombok.extern.log4j.Log4j2;
-import lombok.extern.slf4j.Slf4j;
 import org.apache.logging.log4j.Level;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
