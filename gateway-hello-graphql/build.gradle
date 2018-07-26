@@ -27,7 +27,6 @@ dependencies {
 
     compile("org.springframework.boot:spring-boot-starter-web")
     compile("org.springframework.boot:spring-boot-starter-actuator")
-
     testCompile("org.springframework.boot:spring-boot-starter-test")
     testCompile project(":micro-hello-grpc")
 
@@ -35,13 +34,12 @@ dependencies {
     compileOnly("org.projectlombok:lombok:${lombokVersion}")
     testCompileOnly("org.projectlombok:lombok:${lombokVersion}")
 
-    compile 'org.fluentd:fluent-logger:0.3.3'
+    compile 'org.komamitsu:fluency:1.8.0'
     compile 'com.sndyuk:logback-more-appenders:1.4.3'
 }
 
 dependencyManagement {
     imports { mavenBom("org.springframework.boot:spring-boot-dependencies:${springBootVersion}") }
 }
-
 
 project.logger.lifecycle("~~~~~~~~~~~~~~~~~GATEWAY-HELLO-GRAPHQL BUILD DONE!~~~~~~~~~~~~~~~~~~");

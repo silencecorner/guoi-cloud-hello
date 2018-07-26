@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
     <include resource="org/springframework/boot/logging/logback/base.xml"/>
-    <appender name="FLUENT" class="ch.qos.logback.more.appenders.DataFluentAppender">
+    <appender name="FLUENT" class="ch.qos.logback.more.appenders.FluencyLogbackAppender">
         <tag>dab</tag>
-        <label>normal</label>
         <remoteHost>fluentd-es.logging</remoteHost>
         <port>24224</port>
     </appender>
